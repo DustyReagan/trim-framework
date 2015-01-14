@@ -9,4 +9,4 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <!-- Custom styles for your site -->
-<link href="/css/style.css" rel="stylesheet">
+<link href="<?php echo PROJECT_WEB_ROOT; ?>css/style.css" rel="stylesheet">

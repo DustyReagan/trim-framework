@@ -1,0 +1,9 @@
+.green .active a,
+.green .active a:hover {
+    background-color: #5cb85c !important;
+    color: #fff !important;
+}
+
+.green a:hover {
+    color:#4cae4c !important;
+}
