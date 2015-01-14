@@ -1,0 +1,1 @@
+This directory is for any 3rd party libraries you use in your application.
