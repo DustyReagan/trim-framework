@@ -8,7 +8,7 @@ $currentDirectory = substr($_SERVER['PHP_SELF'], 0 , strrpos($_SERVER['PHP_SELF'
 
 // Assign the root web directory to a named constant so it can be referenced in project HTML links if needed.
 defined('PROJECT_WEB_ROOT')
-or define('PROJECT_WEB_ROOT', $currentDirectory);
+    or define('PROJECT_WEB_ROOT', $currentDirectory);
 
 // The controller should contain your business logic, and is processed first.
 // You can inject the controllers variables into the view. We set it in the 'router' below, if needed.
@@ -24,11 +24,12 @@ $LAYOUT = null;
 $title = null;
 
 // Get the user's requested URL and put the folder paths into an array
-$url = str_replace('?' . $_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']);
+$url = strtok($_SERVER["REQUEST_URI"], '?');
+$url = str_replace($currentDirectory, '', $url);
 $r = explode("/", $url);
 
 // Route the requested URL
-switch ($r[3])
+switch ($r[0])
 {
     case '':
         $CONTROLLER = null;
@@ -70,7 +71,7 @@ if (!empty($VIEW))
     $renderedView = RenderPhpToString(APPLICATION_PATH . "/views/$VIEW.php", $vars);
 // 3rd inject into layout
 if (!empty($LAYOUT))
-    $renderedView = RenderPhpToString(APPLICATION_PATH . "/views/layouts/$LAYOUT.php", array('content' => $renderedView, 'title' => $title));
+    $renderedView = RenderPhpToString(APPLICATION_PATH . "/views/layouts/$LAYOUT.php", array('content' => $renderedView, 'title' => $title, 'relative_path_array' => $r));
 
 // Display the final rendered page
 echo $renderedView;
