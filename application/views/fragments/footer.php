@@ -1,0 +1,1 @@
+<p>&copy; Example trim-framework App Co. <?php echo date("Y") ?></p>

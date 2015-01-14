@@ -1,0 +1,1 @@
+<h1>PHP trim-framework Home Page</h1>
