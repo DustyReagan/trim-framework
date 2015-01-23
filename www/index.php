@@ -62,7 +62,8 @@ function default404()
 
 // THIS IS WHERE THE MAGIC HAPPENS!
 // 1st load controller
-$vars = $renderedView = null;
+$renderedView = null;
+$vars = array();
 if (!empty($CONTROLLER))
     include_once(APPLICATION_PATH . "/controllers/$CONTROLLER.php");
 // 2nd render view
@@ -72,9 +73,9 @@ if (!empty($VIEW))
 // 3rd inject into layout
 if (!empty($LAYOUT))
 {
-    // Make vars from the controller/view available to the layout & fragments
+    // Make vars from the controller/view available to the layout
     // Additionally add content, title, and path information 'r'
-    $vars = array('content' => $renderedView, 'title' => $title, 'r' => $r) + $vars;
+    $vars = array_merge($vars, array('content' => $renderedView, 'title' => $title, 'r' => $r));
 
     $renderedView = RenderPhpToString(APPLICATION_PATH . "/views/layouts/$LAYOUT.php", $vars);
 }
