@@ -71,7 +71,13 @@ if (!empty($VIEW))
     $renderedView = RenderPhpToString(APPLICATION_PATH . "/views/$VIEW.php", $vars);
 // 3rd inject into layout
 if (!empty($LAYOUT))
-    $renderedView = RenderPhpToString(APPLICATION_PATH . "/views/layouts/$LAYOUT.php", array('content' => $renderedView, 'title' => $title, 'relative_path_array' => $r));
+{
+    // Make vars from the controller/view available to the layout & fragments
+    // Additionally add content, title, and path information 'r'
+    $vars = array('content' => $renderedView, 'title' => $title, 'r' => $r) + $vars;
+
+    $renderedView = RenderPhpToString(APPLICATION_PATH . "/views/layouts/$LAYOUT.php", $vars);
+}
 
 // Display the final rendered page
 echo $renderedView;
